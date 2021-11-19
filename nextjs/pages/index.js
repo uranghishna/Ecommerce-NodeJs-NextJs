@@ -1,8 +1,18 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Router from "next/router"
+import { Button } from "@chakra-ui/button"
+import { useColorMode } from "@chakra-ui/color-mode"
+import { Flex } from '@chakra-ui/layout'
 
 export default function Home() {
+  const { colorMode, toggleColorMode } = useColorMode()
+  
+  const navigateTo = (url) => {
+    Router.push(url)
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,10 +26,19 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
+      <Flex alignItems="center">
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Change Theme
         </p>
+        <Button ml={2} size="lg" colorScheme="blue" onClick={toggleColorMode}>
+        Ganti Tema {colorMode === "light" ? "Gelap" : "Terang"}
+        </Button>
+        </Flex>
+
+        <Button size="lg" colorScheme="facebook" onClick={() => navigateTo("/user")}>
+         Pindah Halaman User
+        </Button>
+        
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
